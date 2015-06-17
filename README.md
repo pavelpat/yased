@@ -1,4 +1,4 @@
-# yased - yet another simplest event dispatcher
+# yased - yet another simplest events dispatcher
 
 Using yased example
 -------------------

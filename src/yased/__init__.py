@@ -11,18 +11,20 @@ class EventsDispatcher(object):
     def __init__(self):
         self.handlers = defaultdict(list)
 
-    def send(self, event):
+    def send(self, event, sender=None):
         """
         :param event: Event object.
         :type event: Event
+        :param sender: Event sender or None (send for all connected handlers).
+        :type sender: object|None
 
         :return: Handlers responses.
         :rtype: list
         """
         return [
-            handler(sender=event.sender, *event.args, **event.kwargs)
-            for sender, handler in self.handlers[event.__class__]
-            if sender is None or sender is event.sender]
+            h(*event.args, **event.kwargs)
+            for s, h in self.handlers[event.__class__]
+            if s is None or s is sender]
 
     def connect(self, handler, clazz, sender=None):
         """
@@ -61,13 +63,10 @@ class Event(object):
     """
     def __init__(self, *args, **kwargs):
         """
-        :param sender: Event sender or None.
-        :type sender: object|None
         :param args: List args.
         :type args: list
         :param kwargs: Keyword args.
         :type kwargs: dict
         """
-        self.sender = kwargs.pop('sender', None)
         self.args = args
         self.kwargs = kwargs

@@ -1,15 +1,16 @@
 # coding: utf-8
 
-from distutils.core import setup
+from setuptools import setup
 
 
 setup(
-    packages=['yased'],
-    package_dir={'yased': 'src/yased'},
     name='yased',
-    version='0.0.1',
+    version='0.0.3',
     description='Yet another simplest events dispatcher',
+    url='https://github.com/pavelpat/yased',
     author='Pavel Patrin',
     author_email='pavelpat@ya.ru',
-    url='https://github.com/pavelpat/yased'
+    packages=['yased'],
+    package_dir={'': 'src'},
+    test_suite='tests'
 )

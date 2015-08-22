@@ -68,6 +68,6 @@ class Event(object):
         :param kwargs: Keyword args.
         :type kwargs: dict
         """
-        self.sender = kwargs['sender'] if 'sender' in kwargs else None
+        self.sender = kwargs.pop('sender', None)
         self.args = args
         self.kwargs = kwargs
